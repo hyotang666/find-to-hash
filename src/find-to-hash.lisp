@@ -30,7 +30,8 @@
 		      (map nil
 			   (lambda(elt)
 			     (setf(gethash elt ht)elt))
-			   ,sequence))
+			   ,sequence)
+		      ht)
 		    T))) ; <--- read-only-p
 	     (values(gethash ,target ,hash))))))))
 

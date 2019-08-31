@@ -2,7 +2,7 @@
 (in-package :asdf)
 (defsystem "find-to-hash"
   :version
-  "1.0.3"
+  "1.0.4"
   :depends-on
   (
    "named-readtables" ; readtable manager.

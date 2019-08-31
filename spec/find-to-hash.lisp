@@ -1,26 +1,49 @@
 (defpackage :find-to-hash.spec
-  (:use :cl :jingoh :find-to-hash))
+  (:use :cl :jingoh)
+  (:import-from :find-to-hash #:find-to-hash)
+  )
 (in-package :find-to-hash.spec)
 (setup :find-to-hash)
 
 (requirements-about FIND-TO-HASH :doc-type function)
 
 ;;;; Description:
+; CL:FIND form to equivalent hash-table forms.
+
+#?(find-to-hash(find a "asdf"))
+:expanded-to
+(let((ht
+       (load-time-value
+	 (let((ht
+		(make-hash-table)))
+	   (map nil
+		(lambda(elt)
+		  (setf (gethash elt ht)elt))
+		"asdf")
+	   ht)
+	 t)))
+  (values (gethash a ht)))
 
 #+syntax
 (FIND-TO-HASH whole) ; => result
 
 ;;;; Arguments and Values:
 
-; whole := 
+; whole := find-form, otherwise error.
+#?(find-to-hash :not-find-form) :signals error
 
-; result := 
+; result := Generalized-boolean. Eval (describe 'cl:find).
 
 ;;;; Affected By:
+; none
 
 ;;;; Side-Effects:
+; none
 
 ;;;; Notes:
+; Only :test keyword parameter is acceptable, otherwise expanded to whole.
+#?(find-to-hash (find a b :key #'car))
+:expanded-to (find a b :key #'car)
 
 ;;;; Exceptional-Situations:
 

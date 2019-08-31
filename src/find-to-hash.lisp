@@ -18,22 +18,20 @@
       (if(not(typep args '(or null
 			      (cons (eql :test)(cons * null)))))
 	whole
-	(let((hash(gensym"HASH-TABLE")))
-	  `(let((,hash
-		  (load-time-value
-		    (let((ht
-			   (make-hash-table
-			     ,@(let((test
-				      (getf args :test)))
-				 (when test
-				   `(:test ,test))))))
-		      (map nil
-			   (lambda(elt)
-			     (setf(gethash elt ht)elt))
-			   ,sequence)
-		      ht)
-		    T))) ; <--- read-only-p
-	     (values(gethash ,target ,hash))))))))
+	`(values(gethash ,target
+			 (load-time-value
+			   (let((ht
+				  (make-hash-table
+				    ,@(let((test
+					     (getf args :test)))
+					(when test
+					  `(:test ,test))))))
+			     (map nil
+				  (lambda(elt)
+				    (setf(gethash elt ht)elt))
+				  ,sequence)
+			     ht)
+			   T)))))))
 
 (defun |#H-reader|(stream char number)
   (declare(ignore char number))

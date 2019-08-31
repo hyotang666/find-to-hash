@@ -2,9 +2,11 @@
 (in-package :asdf)
 (defsystem "find-to-hash"
   :version
-  "0.0.0"
+  "1.0.0"
   :depends-on
-  nil
+  (
+   "named-readtables" ; readtable manager.
+   )
   :pathname
   "src/"
   :components

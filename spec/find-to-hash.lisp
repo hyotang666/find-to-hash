@@ -42,8 +42,8 @@
 
 ;;;; Notes:
 ; Only :test keyword parameter is acceptable, otherwise expanded to whole.
-#?(find-to-hash (find a b :key #'car))
-:expanded-to (find a b :key #'car)
+#?(find-to-hash (find var '((:a) (:b) (:c)) :key #'car))
+:expanded-to (find var '((:a) (:b) (:c)) :key #'car)
 
 ;;;; Exceptional-Situations:
 ; When :test function is not one of EQ, EQL, EQUAL, nor EQUALP,

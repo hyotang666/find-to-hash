@@ -20,7 +20,7 @@
 		(lambda(elt)
 		  (setf (gethash elt find-to-hash::ht)elt))
 		"asdf")
-	   ht)
+	   find-to-hash::ht)
 	 t)))
   (values (gethash a ht)))
 

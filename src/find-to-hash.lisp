@@ -13,7 +13,7 @@
 (defmacro find-to-hash(whole)
   (destructuring-bind(op target sequence &rest args)whole
     (assert(eq op 'find))
-    (if(constantp sequence)
+    (if(not(constantp sequence))
       whole
       (if(not(typep args '(or null
 			      (cons (eql :test)(cons * null)))))

@@ -46,4 +46,7 @@
 :expanded-to (find a b :key #'car)
 
 ;;;; Exceptional-Situations:
-
+; When :test function is not one of EQ, EQL, EQUAL, nor EQUALP,
+; behavior is not specified.
+#?(find-to-hash (find var '("a" "b" "c") :test #'string=))
+=> unspecified

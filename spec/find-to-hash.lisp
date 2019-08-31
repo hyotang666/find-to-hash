@@ -14,11 +14,11 @@
 :expanded-to
 (let((ht
        (load-time-value
-	 (let((ht
+	 (let((find-to-hash::ht
 		(make-hash-table)))
 	   (map nil
 		(lambda(elt)
-		  (setf (gethash elt ht)elt))
+		  (setf (gethash elt find-to-hash::ht)elt))
 		"asdf")
 	   ht)
 	 t)))

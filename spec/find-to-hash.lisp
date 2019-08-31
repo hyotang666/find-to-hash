@@ -12,17 +12,15 @@
 
 #?(find-to-hash(find a "asdf"))
 :expanded-to
-(let((ht
-       (load-time-value
-	 (let((find-to-hash::ht
-		(make-hash-table)))
-	   (map nil
-		(lambda(elt)
-		  (setf (gethash elt find-to-hash::ht)elt))
-		"asdf")
-	   find-to-hash::ht)
-	 t)))
-  (values (gethash a ht)))
+(values (gethash a (load-time-value
+		     (let((find-to-hash::ht
+			    (make-hash-table)))
+		       (map nil
+			    (lambda(elt)
+			      (setf (gethash elt find-to-hash::ht)elt))
+			    "asdf")
+		       find-to-hash::ht)
+		     t)))
 
 #+syntax
 (FIND-TO-HASH whole) ; => result

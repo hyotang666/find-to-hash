@@ -12,7 +12,7 @@
 
 (defmacro find-to-hash(whole)
   (destructuring-bind(op target sequence &rest args)whole
-    (declare(ignore op))
+    (assert(eq op 'find))
     (if(constantp sequence)
       whole
       (if(not(typep args '(or null

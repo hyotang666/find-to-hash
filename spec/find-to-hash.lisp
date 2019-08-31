@@ -45,6 +45,10 @@
 #?(find-to-hash (find var '((:a) (:b) (:c)) :key #'car))
 :expanded-to (find var '((:a) (:b) (:c)) :key #'car)
 
+; When sequence is not constant, expanded to whole.
+#?(find-to-hash (find var not-constant))
+:expanded-to (find var not-constant)
+
 ;;;; Exceptional-Situations:
 ; When :test function is not one of EQ, EQL, EQUAL, nor EQUALP,
 ; behavior is not specified.
